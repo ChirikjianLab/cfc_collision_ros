@@ -1,0 +1,3 @@
+[submodule "cfc-collision"]
+	path = cfc-collision
+	url = https://github.com/ChirikjianLab/cfc-collision.git

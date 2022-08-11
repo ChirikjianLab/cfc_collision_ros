@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="snake">
+  <xacro:property name="radius" value="0.02"/>
+  <xacro:property name="base_height" value="0.04"/>
+  <xacro:property name="link1_height" value="0.092"/>
+  <xacro:property name="link2_height" value="0.07"/>
+  <xacro:property name="link3_height" value="0.04"/>
+  
+  <material name="blue">
+    <color rgba="0 0 0.8 0.7"/>
+  </material>
+    
+  <material name="green">
+    <color rgba="0 0.8 0 0.7"/>
+  </material>
+  
+  <!-- Base -->
+  <link name="base">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.00 0.001" />
+      </geometry>
+      <material name="White">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.00 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="base_to_group_1_link0" type="fixed">
+    <parent link="base"/>
+    <child link="group_1_link0"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  
+  <link name="group_1_link0">
+    <visual>
+      <geometry>
+        <cylinder radius="${radius*2}" length="${base_height}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${base_height/2}"/>
+      <material name="green"/>
+    </visual>
+    
+    <collision>
+      <geometry>
+        <cylinder radius="${radius*2}" length="${base_height}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${base_height/2}"/>
+    </collision>
+  </link>
+  
+  <!-- MACRO for groups of links -->
+  <xacro:macro name="snake_group" params="link0 link1 link2 link3">
+    <joint name="${link0}_to_${link1}" type="revolute">
+      <parent link="${link0}"/>
+      <child link="${link1}"/>
+      <origin rpy="0 0 0" xyz="0 0 ${base_height}"/>
+      <axis xyz="1 0 0"/>
+      <limit lower="${-pi/2}" upper="${pi/2}" effort="100" velocity="5"/>
+    </joint>
+  	
+    <link name="${link1}">
+      <visual>
+        <geometry>
+          <cylinder radius="${radius}" length="${link1_height}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link1_height/2}"/>
+        <material name="blue"/>
+      </visual>
+      
+      <collision>
+        <geometry>
+          <cylinder radius="${radius}" length="${link1_height}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link1_height/2}"/>
+      </collision>
+    </link>
+
+    <joint name="${link1}_to_${link2}" type="revolute">
+      <parent link="${link1}"/>
+      <child link="${link2}"/>
+      <origin rpy="0 0 0" xyz="0 0 ${link1_height}"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="${-pi/3}" upper="${pi/2}" effort="100" velocity="5"/>
+    </joint>
+    
+    <link name="${link2}">
+      <visual>
+        <geometry>
+          <box size="${radius*2} ${radius*2} ${link2_height}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link2_height/2}"/>
+        <material name="blue"/>
+      </visual>
+      
+      <collision>
+        <geometry>
+          <box size="${radius*2} ${radius*2} ${link2_height}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link2_height/2}"/>
+      </collision>
+    </link>
+
+    <joint name="${link2}_to_${link3}" type="revolute">
+      <parent link="${link2}"/>
+      <child link="${link3}"/>
+      <origin rpy="0 0 0" xyz="0 0 ${link2_height}"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="${-pi/3}" upper="${pi/3}" effort="100" velocity="5"/>
+    </joint>
+
+    <link name="${link3}">
+      <visual>
+        <geometry>
+          <cylinder radius="${radius}" length="${link3_height}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link3_height/2}"/>
+        <material name="blue"/>
+      </visual>
+      
+      <collision>
+        <geometry>
+          <cylinder radius="${radius}" length="${link3_height}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link3_height/2}"/>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <!-- Groups of links -->
+  <xacro:snake_group link0="group_1_link0" link1="group_1_link1" link2="group_1_link2" link3="group_1_link3"/>
+  <xacro:snake_group link0="group_1_link3" link1="group_2_link1" link2="group_2_link2" link3="group_2_link3"/>
+  <xacro:snake_group link0="group_2_link3" link1="group_3_link1" link2="group_3_link2" link3="group_3_link3"/>
+  <xacro:snake_group link0="group_3_link3" link1="group_4_link1" link2="group_4_link2" link3="group_4_link3"/>
+  <xacro:snake_group link0="group_4_link3" link1="group_5_link1" link2="group_5_link2" link3="group_5_link3"/>
+</robot>

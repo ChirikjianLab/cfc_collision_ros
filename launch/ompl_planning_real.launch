@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Arguments -->
+  <arg name="robot_name" default="panda_arm" />
+  <arg name="env_type" default="real_ems" />
+  <arg name="urdf_file_prefix" default="$(find cfc_collision_app)/resources/urdf/" />
+  
+  <arg name="model" default="$(arg urdf_file_prefix)$(arg robot_name).urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find cfc_collision_app)/rviz/path_planning.rviz" />
+  
+  <!-- Parameters -->
+  <param name="num_trials" value="1" type="int" />
+  
+  <param name="planner_id" value="RRTConnect" type="str" />
+  <param name="sampler_id" value="Uniform" type="str" />
+
+  <param name="robot_name" value="$(arg robot_name)" type="str" />
+  <param name="env_type" value="$(arg env_type)" type="str" />
+  <param name="max_plan_time" value="60" type="double" />
+
+  <param name="config_file_prefix" value="$(find perception_sq)/config/" type="str" />
+  <param name="urdf_file_prefix" value="$(arg urdf_file_prefix)" type="str" />
+  <param name="result_file_prefix" value="$(find cfc_collision_app)/resources/result/" type="str" />
+  
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+  <param name="model" value="$(arg urdf_file_prefix)" />
+
+  <!-- Nodes -->
+  <node name="test_ompl_planner" pkg="cfc_collision_app" type="test_ompl_planner" respawn="false" output="screen" />
+  
+  <node name="environment_publisher" pkg="cfc_collision_app" type="environment_publisher" respawn="false" output="screen" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+    <remap from="joint_states" to="robot_joint_states" />
+  </node>
+  
+  <node name="robot_visualizer" pkg="cfc_collision_app" type="robot_visualizer" />
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>
