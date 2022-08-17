@@ -150,26 +150,30 @@ int main(int argc, char** argv) {
     ros::NodeHandle nh;
 
     // robot state
-    std::string CONFIG_FILE_PREFIX;
+    std::string ROBOT_SQ_FILE_PREFIX;
+    std::string ENV_FILE_PREFIX;
+    std::string END_POINT_FILE_PREFIX;
     std::string RESULT_FILE_PREFIX;
     std::string ENV_TYPE;
     std::string ROBOT_NAME;
     std::string URDF_FILE_PREFIX;
 
-    nh.getParam("config_file_prefix", CONFIG_FILE_PREFIX);
+    nh.getParam("robot_sq_file_prefix", ROBOT_SQ_FILE_PREFIX);
+    nh.getParam("env_file_prefix", ENV_FILE_PREFIX);
+    nh.getParam("end_point_file_prefix", END_POINT_FILE_PREFIX);
     nh.getParam("result_file_prefix", RESULT_FILE_PREFIX);
     nh.getParam("robot_name", ROBOT_NAME);
     nh.getParam("urdf_file_prefix", URDF_FILE_PREFIX);
     nh.getParam("env_type", ENV_TYPE);
 
     const std::string config_file =
-        CONFIG_FILE_PREFIX + "robot_" + ROBOT_NAME + ".csv";
+        ROBOT_SQ_FILE_PREFIX + "robot_" + ROBOT_NAME + ".csv";
     const std::string urdf_file = URDF_FILE_PREFIX + ROBOT_NAME + ".urdf";
 
     MultiBodyTree3D robot = loadRobotMultiBody3D(config_file);
 
     const std::vector<std::vector<double>>& end_points = parse2DCsvFile(
-        CONFIG_FILE_PREFIX + "end_points_" + ROBOT_NAME + ".csv");
+        END_POINT_FILE_PREFIX + "end_points_" + ROBOT_NAME + ".csv");
 
     const std::string state_file = RESULT_FILE_PREFIX + ROBOT_NAME + '_' +
                                    ENV_TYPE + "_ompl_smooth_path_3D.csv";

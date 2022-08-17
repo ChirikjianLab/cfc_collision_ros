@@ -34,54 +34,73 @@
 namespace ob = ompl::base;
 namespace og = ompl::geometric;
 
-/**
- * \brief Planning request
- *
- * \param lowBound, highBound lower and upper bounds for state space
- *
- * \param plannerId set the planner
- *  "PRM", "LazyPRM", "RRT", "RRTConnect", "EST", "SBL", "KPIECE1"
- *
- * \param validSamplerId
- *  "Uniform": uniform valid state sampler
- *  "Gaussian": Gaussian valid state sampler
- *  "OB": obstacle-based valid state sampler
- *  "MC": maximum-clearance valid state sampler
- *  "Bridge": bridge-test valid state sampler
- *
- * \param start, goal start and goal poses
- *
- * \param maxTimeInSec maximum planning time in seconds
- */
+/** \brief Planning request */
 struct planning_request {
+    /** \brief Lower bound of the state space */
     std::vector<double> lowBound;
+
+    /** \brief Upper bound of the state space */
     std::vector<double> highBound;
 
+    /** \brief Set the planner. Supports: "PRM", "LazyPRM", "RRT", "RRTConnect",
+     * "EST", "SBL", "KPIECE1" */
     std::string plannerId = "RRTConnect";
+
+    /** \brief Set valid state sampler. Supports:
+     *  "Uniform": uniform valid state sampler
+     *  "Gaussian": Gaussian valid state sampler
+     *  "OB": obstacle-based valid state sampler
+     *  "MC": maximum-clearance valid state sampler
+     *  "Bridge": bridge-test valid state sampler */
     std::string validSamplerId = "Uniform";
 
+    /** \brief Start configuration */
     std::vector<double> start;
+
+    /** \brief Goal configuration */
     std::vector<double> goal;
 
+    /** \brief maximum planning time in seconds */
     double maxTimeInSec = 60.0;
 };
 
+/** \brief Planning result */
 struct planning_result {
+    /** \brief Indicator of solution */
     bool isSolved = false;
+
+    /** \brief Planning time in seconds */
     double totalTime = 0.0;
 
+    /** \brief Number of collision checks */
     unsigned int numCollisionChecks = 0;
+
+    /** \brief Number of valid states */
     unsigned int numValidStates = 0;
+
+    /** \brief Number of vertices in the graph/tree */
     unsigned int numGraphVertex = 0;
+
+    /** \brief Number of edges in the graph/tree */
     unsigned int numGraphEdges = 0;
+
+    /** \brief Total length of the solved path */
     size_t lengthPath = 0;
 
+    /** \brief List of vertices in graph/tree */
     std::vector<std::vector<double>> vertex;
+
+    /** \brief List of edges in graph/tree */
     std::vector<std::pair<int, int>> edge;
+
+    /** \brief Solved path */
     std::vector<std::vector<double>> path;
+
+    /** \brief Smoothed solution path */
     std::vector<std::vector<double>> path_smooth;
 };
 
+/** \class Methods to plan using OMPL */
 class ompl_planner {
   public:
     ompl_planner(const MultiBodyTree3D& robot, const std::string urdfFile,
@@ -91,11 +110,12 @@ class ompl_planner {
     virtual ~ompl_planner();
 
   public:
-    /** \brief Getter function for solved and interpolated path */
+    /** \brief Getter function for solved path */
     std::vector<std::vector<double>> getSolutionPath() const {
         return res_.path;
     }
 
+    /** \brief Getter function for interpolated solution path */
     std::vector<std::vector<double>> getSmoothedPath() const {
         return res_.path_smooth;
     }

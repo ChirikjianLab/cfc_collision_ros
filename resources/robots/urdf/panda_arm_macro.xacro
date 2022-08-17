@@ -3,6 +3,8 @@
   <!-- safety_distance: Minimum safety distance in [m] by which the collision volumes are expanded and which is enforced during robot motions -->
   <!-- arm_id: Namespace of the panda arm. Serves to differentiate between arms in case of multiple instances. -->
   <xacro:macro name="panda_arm" params="arm_id:='panda' description_pkg:='cfc_collision_app' connected_to:='' xyz:='0 0 0' rpy:='0 0 0' safety_distance:=0">
+    <xacro:arg name='mesh_file_prefix' default="${description_pkg}/resources/robots/meshes/panda" />
+  
     <xacro:unless value="${not connected_to}">
       <joint name="${arm_id}_joint_${connected_to}" type="fixed">
         <parent link="${connected_to}"/>
@@ -14,12 +16,12 @@
     <link name="${arm_id}_link0">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link0.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link0.dae" />
         </geometry>
         </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link0.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link0.stl" />
         </geometry>
       </collision>
     </link>
@@ -27,12 +29,12 @@
     <link name="${arm_id}_link1">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link1.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link1.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link1.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link1.stl" />
         </geometry>
       </collision>
     </link>
@@ -49,12 +51,12 @@
     <link name="${arm_id}_link2">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link2.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link2.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link2.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link2.stl" />
         </geometry>
       </collision>
     </link>
@@ -71,12 +73,12 @@
     <link name="${arm_id}_link3">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link3.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link3.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link3.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link3.stl" />
         </geometry>
       </collision>
     </link>
@@ -93,12 +95,12 @@
     <link name="${arm_id}_link4">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link4.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link4.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link4.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link4.stl" />
         </geometry>
       </collision>
     </link>
@@ -115,12 +117,12 @@
     <link name="${arm_id}_link5">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link5.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link5.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link5.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link5.stl" />
         </geometry>
       </collision>
     </link>
@@ -137,12 +139,12 @@
     <link name="${arm_id}_link6">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link6.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link6.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link6.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link6.stl" />
         </geometry>
       </collision>
     </link>
@@ -159,12 +161,12 @@
     <link name="${arm_id}_link7">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/visual/link7.dae" />
+          <mesh filename="package://$(arg mesh_file_prefix)/visual/link7.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/resources/meshes/panda/collision/link7.stl" />
+          <mesh filename="package://$(arg mesh_file_prefix)/collision/link7.stl" />
         </geometry>
       </collision>
     </link>

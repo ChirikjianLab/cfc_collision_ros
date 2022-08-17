@@ -16,22 +16,22 @@ class PlanningEnvironment {
 
     // Read environmental config files
     void load() {
-        std::string CONFIG_FILE_PREFIX;
+        std::string ENV_FILE_PREFIX;
         std::string ENV_TYPE;
 
-        nh_.getParam("config_file_prefix", CONFIG_FILE_PREFIX);
+        nh_.getParam("env_file_prefix", ENV_FILE_PREFIX);
         nh_.getParam("env_type", ENV_TYPE);
 
         // Read and setup environment config
         ROS_INFO("Loading obstacles...");
-        obstacle_ = loadVectorGeometry(CONFIG_FILE_PREFIX + "obstacle_" +
+        obstacle_ = loadVectorGeometry(ENV_FILE_PREFIX + "obstacle_" +
                                        ENV_TYPE + ".csv");
 
         //        nh_.getParam("obstaclePointCloud", env_config.obstacle_pcl);
         //        for (size_t i = 0; i < obstacle_.size(); ++i) {
         //            pcl::PointCloud<pcl::PointXYZ> cloud;
         //            if (pcl::io::loadPLYFile<pcl::PointXYZ>(
-        //                    CONFIG_FILE_PREFIX + "obstacle_pcl_" + ENV_TYPE +
+        //                    ENV_FILE_PREFIX + "obstacle_pcl_" + ENV_TYPE +
         //                    "_" +
         //                        std::to_string(i) + ".ply",
         //                    cloud) == -1) {

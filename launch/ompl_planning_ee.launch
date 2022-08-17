@@ -2,14 +2,14 @@
 <launch>
   <!-- Arguments -->
   <arg name="robot_name" default="panda_arm" />
-  <arg name="env_type" default="real_ems" />
-  <arg name="env_file_prefix" value="$(find perception_sq)/config/"/>
+  <arg name="env_type" default="sparse" />
+  <arg name="end_point_file_prefix" value="$(find cfc_collision_app)/data/"/>
 
   <!-- Include ompl_planning launch file -->
   <include file="$(find cfc_collision_app)/launch/ompl_planning.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="env_type" value="$(arg env_type)"/>
-    <arg name="env_file_prefix" value="$(arg config_file_prefix)"/>
+    <arg name="end_point_file_prefix" value="$(arg end_point_file_prefix)"/>
   </include>
 
 </launch>

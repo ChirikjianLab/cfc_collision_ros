@@ -19,11 +19,11 @@ find_package(catkin REQUIRED COMPONENTS
     pcl_ros
     eigen_conversions
     message_generation
+    ompl
 )
 
 find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED)
-find_package(ompl 1.5 REQUIRED)
 find_package(Ceres 2.0 REQUIRED)
 
 add_service_files(
@@ -46,16 +46,14 @@ catkin_package(
       EIGEN3
 )
 
-include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS} ${OMPL_INCLUDE_DIRS})
+include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(include cfc-collision/include)
 
 link_directories(${catkin_LIBRARY_DIRS})
 
-file(MAKE_DIRECTORY resources/result/)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/data)
+file(MAKE_DIRECTORY data/result/)
 
 # Subdirectory
 add_subdirectory(src)
-
-set(BUILD_TESTING "OFF")
-add_subdirectory(cfc-collision)

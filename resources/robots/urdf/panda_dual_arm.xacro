@@ -3,7 +3,7 @@
   <xacro:arg name="arm_id_1" default="panda_1" />
   <xacro:arg name="arm_id_2" default="panda_2" />
 
-  <xacro:include filename="$(find cfc_collision_app)/resources/urdf/panda_arm_macro.xacro"/>
+  <xacro:include filename="$(find cfc_collision_app)/resources/robots/urdf/panda_arm_macro.xacro"/>
 
   <!-- box shaped table as base for the 2 Pandas -->
   <link name="base">

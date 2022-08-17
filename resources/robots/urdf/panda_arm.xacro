@@ -6,7 +6,7 @@
     <color rgba="1 1 1 1"/>
   </material>
 
-  <xacro:include filename="$(find cfc_collision_app)/resources/urdf/panda_arm_macro.xacro"/>
+  <xacro:include filename="$(find cfc_collision_app)/resources/robots/urdf/panda_arm_macro.xacro"/>
   
   <!-- box shaped table as base for Panda -->
   <link name="base">

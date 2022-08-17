@@ -29,42 +29,49 @@ int main(int argc, char** argv) {
     ROS_INFO("Motion planning using OMPL + CFC-FP checker");
     ROS_INFO("===========================================");
 
-    /**
-     * \brief Load input parameters
+    // Load robot and environment configurations
+    string ROBOT_NAME;
+    string ENV_TYPE;
+
+    string ROBOT_SQ_FILE_PREFIX;
+    string ENV_FILE_PREFIX;
+    string END_POINT_FILE_PREFIX;
+    string URDF_FILE_PREFIX;
+    string RESULT_FILE_PREFIX;
+
+    nh.getParam("robot_name", ROBOT_NAME);
+    nh.getParam("env_type", ENV_TYPE);
+
+    nh.getParam("robot_sq_file_prefix", ROBOT_SQ_FILE_PREFIX);
+    nh.getParam("env_file_prefix", ENV_FILE_PREFIX);
+    nh.getParam("end_point_file_prefix", END_POINT_FILE_PREFIX);
+    nh.getParam("urdf_file_prefix", URDF_FILE_PREFIX);
+    nh.getParam("result_file_prefix", RESULT_FILE_PREFIX);
+
+    /** \brief Load input parameters
      * \param Planner ID: PRM, LazyPRM, RRT, RRTconnect, EST, SBL, KPIECE
-     * \param Sampler ID: Uniform, Gaussian, OB, MC, Bridge
-     */
+     * \param Sampler ID: Uniform, Gaussian, OB, MC, Bridge */
     int N = 1;
     string ID_PLANNER = "RRTConnect";
     string ID_SAMPLER = "Uniform";
-    string ROBOT_NAME;
     double MAX_PLAN_TIME = 60.0;
-    string CONFIG_FILE_PREFIX;
-    string ENV_TYPE;
-    string URDF_FILE_PREFIX;
-    string RESULT_FILE_PREFIX;
 
     nh.getParam("num_trials", N);
     nh.getParam("planner_id", ID_PLANNER);
     nh.getParam("sampler_id", ID_SAMPLER);
-    nh.getParam("robot_name", ROBOT_NAME);
     nh.getParam("max_plan_time", MAX_PLAN_TIME);
-    nh.getParam("config_file_prefix", CONFIG_FILE_PREFIX);
-    nh.getParam("env_type", ENV_TYPE);
-    nh.getParam("urdf_file_prefix", URDF_FILE_PREFIX);
-    nh.getParam("result_file_prefix", RESULT_FILE_PREFIX);
 
     // Read and setup environment config
-    const vector<cfc::SuperQuadrics>& obs = loadVectorGeometry(
-        CONFIG_FILE_PREFIX + "obstacle_" + ENV_TYPE + ".csv");
+    const vector<cfc::SuperQuadrics>& obs =
+        loadVectorGeometry(ENV_FILE_PREFIX + "obstacle_" + ENV_TYPE + ".csv");
 
     // Read end points config file
-    auto end_points = parse2DCsvFile(CONFIG_FILE_PREFIX + "end_points_" +
+    auto end_points = parse2DCsvFile(END_POINT_FILE_PREFIX + "end_points_" +
                                      ROBOT_NAME + ".csv");
 
     // Setup robot
     const std::string configFile =
-        CONFIG_FILE_PREFIX + "robot_" + ROBOT_NAME + ".csv";
+        ROBOT_SQ_FILE_PREFIX + "robot_" + ROBOT_NAME + ".csv";
     const std::string urdfFile = URDF_FILE_PREFIX + ROBOT_NAME + ".urdf";
 
     MultiBodyTree3D robot = loadRobotMultiBody3D(configFile);

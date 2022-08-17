@@ -3,29 +3,32 @@
   <!-- Arguments -->
   <arg name="robot_name" default="panda_dual_arm" />
   <arg name="env_type" default="sparse" />
-  <arg name="urdf_file_prefix" default="$(find cfc_collision_app)/resources/urdf/" />
+  
+  <arg name="robot_sq_file_prefix" default="$(find cfc_collision_app)/resources/robots/superquadrics/" />
+  <arg name="urdf_file_prefix" default="$(find cfc_collision_app)/resources/robots/urdf/" />
+  
+  <arg name="env_file_prefix" default="$(find cfc_collision_app)/resources/problems/" />
+  <arg name="end_point_file_prefix" default="$(find cfc_collision_app)/resources/problems/" />
   
   <arg name="model" default="$(arg urdf_file_prefix)$(arg robot_name).urdf"/>
   <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find cfc_collision_app)/rviz/path_planning.rviz" />
   
   <!-- Parameters -->
-  <param name="num_trials" value="1" type="int" />
+  <rosparam command="load" file="$(find cfc_collision_app)/config/ompl_planner.yaml" />
   
-  <param name="planner_id" value="RRTConnect" type="str" />
-  <param name="sampler_id" value="Uniform" type="str" />
-
   <param name="robot_name" value="$(arg robot_name)" type="str" />
-  <param name="env_type" value="$(arg env_type)" type="str" />
-  <param name="max_plan_time" value="60" type="double" />
-
-  <param name="config_file_prefix" value="$(find cfc_collision_app)/resources/config/" type="str" />
-  <param name="urdf_file_prefix" value="$(arg urdf_file_prefix)" type="str" />
-  <param name="result_file_prefix" value="$(find cfc_collision_app)/resources/result/" type="str" />
-  
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
   <param name="model" value="$(arg urdf_file_prefix)" />
-
+  <param name="env_type" value="$(arg env_type)" type="str" />
+  
+  <param name="robot_sq_file_prefix" value="$(arg robot_sq_file_prefix)" type="str" />
+  <param name="urdf_file_prefix" value="$(arg urdf_file_prefix)" type="str" />
+  
+  <param name="env_file_prefix" value="$(arg env_file_prefix)" type="str" />
+  <param name="end_point_file_prefix" value="$(arg end_point_file_prefix)" type="str" />
+  <param name="result_file_prefix" value="$(find cfc_collision_app)/data/result/" type="str" />
+  
   <!-- Nodes -->
   <node name="test_ompl_planner" pkg="cfc_collision_app" type="test_ompl_planner" respawn="false" output="screen" />
   

@@ -2,11 +2,13 @@
 <launch>
   <!-- Arguments -->
   <arg name="robot_name" default="panda_arm" />
+  <arg name="ee_pose_file" value="$(find cfc_collision_app)/resources/problems/end_points_ee_panda_arm.csv"/>
+  <arg name="joint_config_file" value="$(find cfc_collision_app)/data/end_points_panda_arm.csv"/>
 
   <!-- Parameters -->
   <param name="robot_name" value="$(arg robot_name)" type="str" />
-  <param name="ee_pose_file" value="$(find cfc_collision_app)/resources/config/end_points_ee_panda_arm.csv" type="str" />
-  <param name="joint_config_file" value="$(find cfc_collision_app)/resources/config/end_points_panda_arm.csv" type="str" />
+  <param name="ee_pose_file" value="$(arg ee_pose_file)" type="str" />
+  <param name="joint_config_file" value="$(arg joint_config_file)" type="str" />
 
   <!-- Nodes -->
   <include file="$(find panda_moveit_config)/launch/planning_context.launch">

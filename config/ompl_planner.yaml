@@ -1,0 +1,4 @@
+num_trials: 1
+planner_id: "RRTConnect"
+sampler_id: "Uniform"
+max_plan_time: 60.0
