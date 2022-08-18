@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
-project(cfc_collision_app VERSION 0.1.0 LANGUAGES CXX)
+project(cfc_collision_ros VERSION 0.1.0 LANGUAGES CXX)
 
-set(default_build_type "Release")
+set(CMAKE_BUILD_TYPE "Release")
 add_compile_options(-std=c++14)
 
 # Packages
@@ -16,7 +16,6 @@ find_package(catkin REQUIRED COMPONENTS
     tf2_ros
     tf2_eigen
     tf2_geometry_msgs
-    pcl_ros
     eigen_conversions
     message_generation
     ompl
@@ -46,7 +45,7 @@ catkin_package(
       EIGEN3
 )
 
-include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
+include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS} ${OMPL_INCLUDE_DIRS})
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(include cfc-collision/include)
 

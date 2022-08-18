@@ -10,7 +10,7 @@
 
 #include <fstream>
 
-#include <cfc_collision_app/SolveIK.h>
+#include <cfc_collision_ros/SolveIK.h>
 
 class SolveIK {
   public:
@@ -35,8 +35,8 @@ class SolveIK {
 
   public:
     bool callBackSolveIK(
-        cfc_collision_app::SolveIK::Request& req,
-        cfc_collision_app::SolveIK::Response& res) {
+        cfc_collision_ros::SolveIK::Request& req,
+        cfc_collision_ros::SolveIK::Response& res) {
         // Get end effector poses from the list
         ee_poses = parse2DCsvFile(EE_POSE_FILE);
 

@@ -26,20 +26,6 @@ class PlanningEnvironment {
         ROS_INFO("Loading obstacles...");
         obstacle_ = loadVectorGeometry(ENV_FILE_PREFIX + "obstacle_" +
                                        ENV_TYPE + ".csv");
-
-        //        nh_.getParam("obstaclePointCloud", env_config.obstacle_pcl);
-        //        for (size_t i = 0; i < obstacle_.size(); ++i) {
-        //            pcl::PointCloud<pcl::PointXYZ> cloud;
-        //            if (pcl::io::loadPLYFile<pcl::PointXYZ>(
-        //                    ENV_FILE_PREFIX + "obstacle_pcl_" + ENV_TYPE +
-        //                    "_" +
-        //                        std::to_string(i) + ".ply",
-        //                    cloud) == -1) {
-        //                PCL_ERROR("Couldn't read file1 \n");
-        //            }
-
-        //            obstacle_pcl_.push_back(cloud);
-        //        }
     }
 
     // Setup publishers
@@ -53,18 +39,12 @@ class PlanningEnvironment {
             nh_.advertise<visualization_msgs::MarkerArray>("obstacle", 1);
         obstacle_surf_pub_ =
             nh_.advertise<visualization_msgs::MarkerArray>("obstacle_surf", 1);
-
-        //            obstacle_pcl_pub_.push_back(nh_.advertise<sensor_msgs::PointCloud2>(
-        //                "obstacle_pcl_" + std::to_string(i), 1));
     }
 
     /** \brief Visualize 2D arena and obstacles */
     void visualize() {
         plotShapePoint(obstacle_, obstacle_pub_, 1.0, 0.0, 0.0);
         plotShapeSurf(obstacle_, obstacle_surf_pub_, 1.0, 0.0, 0.0, 1.0);
-
-        //            plotPointCloud(&obstacle_pcl_.at(i),
-        //            obstacle_pcl_pub_.at(i));
     }
 
   private:
@@ -72,7 +52,6 @@ class PlanningEnvironment {
     std::string name_;
 
     std::vector<cfc::SuperQuadrics> obstacle_;
-    std::vector<pcl::PointCloud<pcl::PointXYZ>> obstacle_pcl_;
 
     tf::TransformBroadcaster world_frame_pub_;
     tf::Transform tf_world_;

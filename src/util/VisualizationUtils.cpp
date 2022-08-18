@@ -169,16 +169,6 @@ void transformRobot(MultiBodyTree3D *robot,
     robot->robotTF(robot_tf);
 }
 
-void plotPointCloud(const pcl::PointCloud<pcl::PointXYZ> *cloud,
-                    const ros::Publisher &pcl_pub) {
-    sensor_msgs::PointCloud2 output;
-    pcl::toROSMsg(*cloud, output);
-
-    output.header.frame_id = "/world_frame";
-
-    pcl_pub.publish(output);
-}
-
 geometry_msgs::Transform poseToGeomMsgs(const std::vector<double> &pose) {
     // From vector of double to geometric message
     geometry_msgs::Transform transform;

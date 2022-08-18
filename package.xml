@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>cfc_collision_app</name>
+  <name>cfc_collision_ros</name>
   <version>0.1.0</version>
-  <description>The application (ROS) package for collision detection based on closed-form contact space (CFC)</description>
+  <description>ROS package for collision detection based on closed-form contact space (CFC)</description>
 
   <maintainer email="ruansp@nus.edu.sg">Sipu Ruan</maintainer>
 
@@ -22,7 +22,6 @@
   <build_depend>tf2_ros</build_depend>
   <build_depend>tf2_eigen</build_depend>
   <build_depend>tf2_geometry_msgs</build_depend>
-  <build_depend>pcl_ros</build_depend>
   <build_depend>eigen_conversions</build_depend>
   <build_depend>message_generation</build_depend>
   <build_depend>ompl</build_depend>
@@ -39,7 +38,6 @@
   <exec_depend>tf2_ros</exec_depend>
   <exec_depend>tf2_eigen</exec_depend>
   <exec_depend>tf2_geometry_msgs</exec_depend>
-  <exec_depend>pcl_ros</exec_depend>
   <exec_depend>eigen_conversions</exec_depend>
   <exec_depend>message_runtime</exec_depend>
 

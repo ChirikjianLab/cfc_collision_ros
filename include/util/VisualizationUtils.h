@@ -11,11 +11,6 @@
 #include <trajectory_msgs/MultiDOFJointTrajectoryPoint.h>
 #include <visualization_msgs/MarkerArray.h>
 
-#include <pcl/io/ply_io.h>
-#include <pcl/point_cloud.h>
-#include <pcl/point_types.h>
-#include <pcl_conversions/pcl_conversions.h>
-
 void plotPoints(const std::vector<std::vector<geometry_msgs::Point>> &points,
                 const ros::Publisher &publisher, const double r, const double g,
                 const double b);
@@ -45,8 +40,5 @@ void plotRobot(MultiBodyTree3D *robot,
 
 void transformRobot(MultiBodyTree3D *robot,
                     const geometry_msgs::Transform *transform);
-
-void plotPointCloud(const pcl::PointCloud<pcl::PointXYZ> *cloud,
-                    const ros::Publisher &pcl_pub);
 
 geometry_msgs::Transform poseToGeomMsgs(const std::vector<double> &pose);

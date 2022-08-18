@@ -9,7 +9,7 @@
 
   <!-- Run RViz with a custom config -->
   <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false"
-	args="-d $(find cfc_collision_app)/rviz/visualize_collision.rviz" output="screen">
+	args="-d $(find cfc_collision_ros)/rviz/visualize_collision.rviz" output="screen">
     <rosparam command="load" file="$(find panda_moveit_config)/config/kinematics.yaml"/>
   </node>
 
@@ -17,7 +17,7 @@
   <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 1 /world/panda_link0 /panda_link0 10" />
 
   <!-- launch Test file for collision detection -->
-  <node name="moveit_visualize_collision" pkg="cfc_collision_app" type="moveit_visualize_collision" respawn="false" output="screen">
+  <node name="moveit_visualize_collision" pkg="cfc_collision_ros" type="moveit_visualize_collision" respawn="false" output="screen">
     <rosparam command="load" file="$(find panda_moveit_config)/config/kinematics.yaml"/>
   </node>
 
