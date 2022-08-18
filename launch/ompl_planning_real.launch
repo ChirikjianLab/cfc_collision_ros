@@ -6,10 +6,10 @@
   <arg name="env_file_prefix" value="$(find perception_sq)/config/"/>
 
   <!-- Include ompl_planning launch file -->
-  <include file="$(find cfc_collision_app)/launch/ompl_planning.launch">
+  <include file="$(find cfc_collision_ros)/launch/ompl_planning.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="env_type" value="$(arg env_type)"/>
-    <arg name="env_file_prefix" value="$(arg config_file_prefix)"/>
+    <arg name="env_file_prefix" value="$(arg env_file_prefix)"/>
   </include>
 
 </launch>

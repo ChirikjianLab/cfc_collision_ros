@@ -2,8 +2,8 @@
 <launch>
   <!-- Arguments -->
   <arg name="robot_name" default="panda_arm" />
-  <arg name="ee_pose_file" value="$(find cfc_collision_app)/resources/problems/end_points_ee_panda_arm.csv"/>
-  <arg name="joint_config_file" value="$(find cfc_collision_app)/data/end_points_panda_arm.csv"/>
+  <arg name="ee_pose_file" default="$(find cfc_collision_ros)/resources/problems/end_points_ee_panda_arm.csv"/>
+  <arg name="joint_config_file" default="$(find cfc_collision_ros)/data/end_points_panda_arm.csv"/>
 
   <!-- Parameters -->
   <param name="robot_name" value="$(arg robot_name)" type="str" />
@@ -16,7 +16,7 @@
     <arg name="load_gripper" value="false"/>
   </include>
   
-  <node name="test_ik_solver" pkg="cfc_collision_app" type="test_ik_solver" respawn="false" output="screen">
+  <node name="test_ik_solver" pkg="cfc_collision_ros" type="test_ik_solver" respawn="false" output="screen">
     <rosparam command="load" file="$(find panda_moveit_config)/config/kinematics.yaml"/>
   </node>
 

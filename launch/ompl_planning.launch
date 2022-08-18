@@ -4,18 +4,18 @@
   <arg name="robot_name" default="panda_dual_arm" />
   <arg name="env_type" default="sparse" />
   
-  <arg name="robot_sq_file_prefix" default="$(find cfc_collision_app)/resources/robots/superquadrics/" />
-  <arg name="urdf_file_prefix" default="$(find cfc_collision_app)/resources/robots/urdf/" />
+  <arg name="robot_sq_file_prefix" default="$(find cfc_collision_ros)/resources/robots/superquadrics/" />
+  <arg name="urdf_file_prefix" default="$(find cfc_collision_ros)/resources/robots/urdf/" />
   
-  <arg name="env_file_prefix" default="$(find cfc_collision_app)/resources/problems/" />
-  <arg name="end_point_file_prefix" default="$(find cfc_collision_app)/resources/problems/" />
+  <arg name="env_file_prefix" default="$(find cfc_collision_ros)/resources/problems/" />
+  <arg name="end_point_file_prefix" default="$(find cfc_collision_ros)/resources/problems/" />
   
   <arg name="model" default="$(arg urdf_file_prefix)$(arg robot_name).urdf"/>
   <arg name="gui" default="true" />
-  <arg name="rvizconfig" default="$(find cfc_collision_app)/rviz/path_planning.rviz" />
+  <arg name="rvizconfig" default="$(find cfc_collision_ros)/rviz/path_planning.rviz" />
   
   <!-- Parameters -->
-  <rosparam command="load" file="$(find cfc_collision_app)/config/ompl_planner.yaml" />
+  <rosparam command="load" file="$(find cfc_collision_ros)/config/ompl_planner.yaml" />
   
   <param name="robot_name" value="$(arg robot_name)" type="str" />
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
@@ -27,19 +27,19 @@
   
   <param name="env_file_prefix" value="$(arg env_file_prefix)" type="str" />
   <param name="end_point_file_prefix" value="$(arg end_point_file_prefix)" type="str" />
-  <param name="result_file_prefix" value="$(find cfc_collision_app)/data/result/" type="str" />
+  <param name="result_file_prefix" value="$(find cfc_collision_ros)/data/result/" type="str" />
   
   <!-- Nodes -->
-  <node name="test_ompl_planner" pkg="cfc_collision_app" type="test_ompl_planner" respawn="false" output="screen" />
+  <node name="test_ompl_planner" pkg="cfc_collision_ros" type="test_ompl_planner" respawn="false" output="screen" />
   
-  <node name="environment_publisher" pkg="cfc_collision_app" type="environment_publisher" respawn="false" output="screen" />
+  <node name="environment_publisher" pkg="cfc_collision_ros" type="environment_publisher" respawn="false" output="screen" />
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
     <remap from="joint_states" to="robot_joint_states" />
   </node>
   
-  <node name="robot_visualizer" pkg="cfc_collision_app" type="robot_visualizer" />
+  <node name="robot_visualizer" pkg="cfc_collision_ros" type="robot_visualizer" />
   
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
