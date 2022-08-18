@@ -52,6 +52,17 @@ roslaunch cfc_collision_ros moveit_visualize_collision.launch
 ```
 **Additional feature**: when the object and robot are close to each other, a line segment connecting the closest witness points are shown.
 
+<table>
+  <tr>
+    <th>Separated</th>
+    <th>In collision</th>
+  </tr>
+  <tr>
+    <td><img src="/resources/figures/visualize_collision_separated.png" alt="separated" width="350"/></td>
+    <td><img src="/resources/figures/visualize_collision_collided.png" alt="collided" width="350"/></td>
+  </tr>
+</table>
+
 ### Planning using OMPL
 ```sh
 roslaunch cfc_collision_ros ompl_planning.launch
@@ -72,6 +83,17 @@ To reproduce figures in the paper (Figure 6), please use the following arguments
 | Fig. 6(a) | Snake | Narrow | `robot_name:=snake env_type:=narrow` |
 | Fig. 6(b) | Panda single arm | Dense | `robot_name:=panda_arm env_type:=dense` |
 | Fig. 6(c) | Panda dual arm | Sparse | `robot_name:=panda_dual_arm env_type:=sparse` |
+
+<table>
+  <tr>
+    <th>Snake-like robot</th>
+    <th>Franka Emika Panda robot</th>
+  </tr>
+  <tr>
+    <td><img src="/resources/figures/ompl_planning_fig_6_a.png" alt="snake" width="350"/></td>
+    <td><img src="/resources/figures/ompl_planning_fig_6_b.png" alt="panda" width="350"/></td>
+  </tr>
+</table>
 
 ### Solve inverse kinematics
 Given a set of SE(3) poses, solve inverse kinematics using the MoveIt feature ([moveit::core::RobotState::setFromIK](http://docs.ros.org/en/indigo/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html#ab816880027ef7e63bbdef22a0497cc78))
