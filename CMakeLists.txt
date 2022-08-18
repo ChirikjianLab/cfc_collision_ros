@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(cfc_collision_ros VERSION 0.2.0 LANGUAGES CXX)
+project(cfc_collision_ros VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_BUILD_TYPE "Release")
 add_compile_options(-std=c++14)

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>cfc_collision_ros</name>
-  <version>0.2.0</version>
+  <version>0.1.0</version>
   <description>ROS package for collision detection based on closed-form contact space (CFC)</description>
 
   <maintainer email="ruansp@nus.edu.sg">Sipu Ruan</maintainer>
