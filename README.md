@@ -64,6 +64,15 @@ roslaunch cfc_collision_ros ompl_planning.launch robot_name:=panda_arm env_type:
 - For real Panda robot, use [`ompl_planning_real.launch`](/launch/ompl_planning_real.launch)
 - For end points in workspace (only supports `panda_arm` robot model), use [`ompl_planning_ee.launch`](/launch/ompl_planning_ee.launch). Before planning, please run IK solver launch file first (instructed below).
 
+**Reproduction of figures in paper**
+
+To reproduce figures in the paper (Figure 6), please use the following arguments when launching `ompl_planning.launch`:
+| Figure | Robot name | Environment type | Argument |
+|--------|------------|------------------|----------|
+| Fig. 6(a) | Snake | Narrow | `robot_name:=snake env_type:=narrow` |
+| Fig. 6(b) | Panda single arm | Dense | `robot_name:=panda_arm env_type:=dense` |
+| Fig. 6(c) | Panda dual arm | Sparse | `robot_name:=panda_dual_arm env_type:=sparse` |
+
 ### Solve inverse kinematics
 Given a set of SE(3) poses, solve inverse kinematics using the MoveIt feature ([moveit::core::RobotState::setFromIK](http://docs.ros.org/en/indigo/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html#ab816880027ef7e63bbdef22a0497cc78))
 ```
